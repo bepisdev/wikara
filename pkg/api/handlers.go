@@ -2,8 +2,8 @@ package api
 
 import (
 	"net/http"
-	"github.com/joshburnsxyz/go-wiki/pkg/templates"
-	"github.com/joshburnsxyz/go-wiki/pkg/page"
+	"github.com/joshburnsxyz/wikara/pkg/templates"
+	"github.com/joshburnsxyz/wikara/pkg/page"
 )
 
 // viewHandler displays the view page.

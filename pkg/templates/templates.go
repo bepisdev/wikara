@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/joshburnsxyz/go-wiki/pkg/page"
+	"github.com/joshburnsxyz/wikara/pkg/page"
 )
 
 var (
