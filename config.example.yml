@@ -1,5 +1,10 @@
+# Server Config
 Host: 0.0.0.0
 Port: 8080
+
+# Storage Folder for pages (relative to server binary)
 ContentDir: data
+
+# Branding Settings
 FrontPageTitle: FrontPage
 SiteTitle: Wikara
