@@ -10,7 +10,10 @@ dist:
 		-o ./$(OUT)/$(BIN) \
 		./cmd/$(BIN)
 	@cp config.example.yml $(OUT)/config.yml
-	@cp -R ./tmpl $(OUT)/tmpl
+	@mkdir -p $(OUT)/assets
+	@mkdir -p $(OUT)/tmpl
+	@cp -R ./tmpl/*.html $(OUT)/tmpl
+	@cp -R ./tmpl/static_assets/* $(OUT)/assets
 
 clean:
 	@rm -rf $(OUT)

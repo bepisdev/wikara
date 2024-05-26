@@ -35,6 +35,10 @@ func main() {
 	    }
 	}
 
+	// Static asset handling
+	assetPath := fmt.Sprintf("%s/assets", utils.GetExecPath())
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir(assetPath))))
+
 	// Set up routes
 	http.HandleFunc("/", api.FrontPageHandler)
 	http.HandleFunc("/view/", api.MakeHandler(api.ViewHandler))

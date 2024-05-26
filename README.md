@@ -60,5 +60,4 @@ make
 
 - Implement users/authentication to protect pages and edit functionality
 	- Page ownership
-- Make the CSS external to the web page so it can be customized
 - Add logo to the sidebar
