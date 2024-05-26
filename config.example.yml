@@ -1,6 +1,9 @@
 # Server Config
 Host: 0.0.0.0
 Port: 8080
+SSL: false
+SSLCertFile: ./cert.pem
+SSLKeyFile: ./key.pem
 
 # Storage Folder for pages (relative to server binary)
 ContentDir: data

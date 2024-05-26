@@ -16,6 +16,9 @@ func main() {
 	// Set up config defaults
 	viper.SetDefault("Port", "8080")
 	viper.SetDefault("Host", "0.0.0.0")
+	viper.SetDefault("SSL", false)
+	viper.SetDefault("SSLCertFile", "./cert.pem")
+	viper.SetDefault("SSLKeyFile", "./key.pem")
 	viper.SetDefault("ContentDir", "data")
 	viper.SetDefault("FrontPageTitle", "FrontPage")
 	viper.SetDefault("SiteTitle", "Wikara")
@@ -42,6 +45,16 @@ func main() {
 	templates.Init()
 	
 	bindAddr := fmt.Sprintf("%s:%s", viper.GetString("Host"), viper.GetString("Port"))
-	log.Println(fmt.Sprintf("Server started on %s", bindAddr))
-	log.Fatal(http.ListenAndServe(bindAddr, nil))
+
+	if viper.GetBool("SSL") {
+		certFile := viper.GetString("SSLCertFile")
+		keyFile := viper.GetString("SSLKeyFile")
+		log.Println(fmt.Sprintf("Server started on https://%s", bindAddr))
+		log.Fatal(http.ListenAndServeTLS(bindAddr, certFile, keyFile, nil))
+	} else if !viper.GetBool("SSL"){
+		log.Println(fmt.Sprintf("Server started on http://%s", bindAddr))
+		log.Fatal(http.ListenAndServe(bindAddr, nil))
+	} else {
+		log.Fatal("Could not start server, please check config file.")
+	}
 }
