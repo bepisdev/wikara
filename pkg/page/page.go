@@ -14,6 +14,7 @@ type Page struct {
 	Body  []byte
 	HtmlContent template.HTML
 	SiteTitle string
+	SiteLogoURL string
 }
 
 const fileExtension = ".md"
@@ -33,6 +34,7 @@ func (p *Page) Save() error {
 func LoadPage(title string) (*Page, error) {
 	dataDir := getContentDir()
 	siteTitle := viper.GetString("SiteTitle")
+	siteLogoUrl := viper.GetString("SiteLogoURL")
 	filename := filepath.Join(dataDir, title+fileExtension)
 	body, _ := os.ReadFile(filename)
 	html := template.HTML(sanitizeHTML(mdToHTML(body)))
@@ -45,6 +47,7 @@ func LoadPage(title string) (*Page, error) {
 		Body: body,
 		HtmlContent: html,
 		SiteTitle: siteTitle,
+		SiteLogoURL: siteLogoUrl,
 	}
 
 	return p, nil
