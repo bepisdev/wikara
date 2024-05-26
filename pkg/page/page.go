@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"html/template"
 	"github.com/gomarkdown/markdown"
+	"github.com/spf13/viper"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
 )
@@ -18,10 +19,10 @@ type Page struct {
 }
 
 const fileExtension = ".txt"
-const dataDir = "data"
 
 // Save method writes the Page's content to a text file.
 func (p *Page) Save() error {
+	dataDir := viper.GetString("ContentDir")
 	if err := ensureDir(dataDir); err != nil {
 		return err
 	}
@@ -31,6 +32,7 @@ func (p *Page) Save() error {
 
 // LoadPage loads a Page from a text file.
 func LoadPage(title string) (*Page, error) {
+	dataDir := viper.GetString("ContentDir")
 	filename := filepath.Join(dataDir, title+fileExtension)
 	body, err := os.ReadFile(filename)
 	html := template.HTML(mdToHTML(body))
