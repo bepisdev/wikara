@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"net/http"
@@ -7,7 +7,7 @@ import (
 )
 
 // viewHandler displays the view page.
-func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
+func ViewHandler(w http.ResponseWriter, r *http.Request, title string) {
 	p, err := page.LoadPage(title)
 	if err != nil {
 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
@@ -17,7 +17,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 // frontPageHandler displays the front page.
-func frontPageHandler(w http.ResponseWriter, r *http.Request) {
+func FrontPageHandler(w http.ResponseWriter, r *http.Request) {
 	p, err := page.LoadPage("FrontPage")
 	if err != nil {
 		http.Redirect(w, r, "/edit/FrontPage", http.StatusFound)
@@ -27,7 +27,7 @@ func frontPageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // editHandler displays the edit page.
-func editHandler(w http.ResponseWriter, r *http.Request, title string) {
+func EditHandler(w http.ResponseWriter, r *http.Request, title string) {
 	p, err := page.LoadPage(title)
 	if err != nil {
 		p = &page.Page{Title: title}
@@ -36,7 +36,7 @@ func editHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 // saveHandler saves the edited page.
-func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
+func SaveHandler(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
 	p := &page.Page{Title: title, Body: []byte(body)}
 	err := p.Save()
