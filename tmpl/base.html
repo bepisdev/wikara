@@ -26,7 +26,7 @@
         }
         #content {
             width: 80%;
-	    height: 100vh;
+	    height: 90vh;
             padding: 20px;
         }
         h1 {
@@ -38,6 +38,12 @@
         }
         a:hover {
             text-decoration: underline;
+        }
+        footer {
+            background-color: #e0e0e0;
+            text-align: center;
+            padding: 10px;
+            border-top: 1px solid #ccc;
         }
     </style>
 </head>
@@ -53,6 +59,9 @@
             {{template "content" .}}
         </main>
     </div>
+    <footer>
+	&copy; 2024 Built with <a href="https://github.com/joshburnsxyz/go-wiki">My Wiki Engine</a> All rights reserved.
+    </footer>
 </body>
 </html>
 {{ end }}
