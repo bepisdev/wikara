@@ -11,7 +11,11 @@ dist:
 		./cmd/$(BIN)
 	@cp config.example.yml $(OUT)/config.yml
 	@cp -R ./tmpl $(OUT)/tmpl
+
 clean:
 	@rm -rf $(OUT)
+
+test:
+	$(GOX) test ./...
 
 .PHONY: clean
