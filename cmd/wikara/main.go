@@ -18,9 +18,12 @@ func main() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
-	err := viper.ReadInConfig()
-	if err != nil {
-		log.Fatal(fmt.Errorf("Fatal error config file: %w", err))
+	if err := viper.ReadInConfig(); err != nil {
+	    if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+		    log.Println("No config file found, Running with default configuration")
+	    } else {
+		    log.Fatal("Error in config file %w", err)
+	    }
 	}
 
 	// Set up routes
