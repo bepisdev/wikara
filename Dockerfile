@@ -2,9 +2,8 @@ FROM golang:1.22
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY . ./
 RUN go mod download
-COPY * ./
 RUN make
 
 EXPOSE 8080
