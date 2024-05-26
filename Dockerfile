@@ -5,7 +5,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY * ./
-RUN CGO_ENABLED=0 GOOS=linux make
+RUN make
 
 EXPOSE 8080
 
