@@ -16,7 +16,7 @@ type Page struct {
 	SiteTitle string
 }
 
-const fileExtension = ".txt"
+const fileExtension = ".md"
 
 // Save method writes the Page's content to a text file.
 func (p *Page) Save() error {

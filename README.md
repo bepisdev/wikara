@@ -55,3 +55,10 @@ make
 ```
 
 5. You can now visit the Wiki at `http://<your-ip-address>:8080` (or whatever you configure it to).
+
+## Todo
+
+- Implement users/authentication to protect pages and edit functionality
+	- Page ownership
+- Make the CSS external to the web page so it can be customized
+- Add logo to the sidebar
