@@ -17,6 +17,7 @@ func main() {
 	viper.SetDefault("Port", "8080")
 	viper.SetDefault("Host", "0.0.0.0")
 	viper.SetDefault("ContentDir", "data")
+	viper.SetDefault("FrontPageTitle", "FrontPage")
 
 	// Load config file
 	viper.SetConfigName("config")

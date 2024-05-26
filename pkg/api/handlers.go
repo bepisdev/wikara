@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"github.com/joshburnsxyz/wikara/pkg/templates"
 	"github.com/joshburnsxyz/wikara/pkg/page"
+	"github.com/spf13/viper"
 )
 
 // viewHandler displays the view page.
@@ -18,9 +19,10 @@ func ViewHandler(w http.ResponseWriter, r *http.Request, title string) {
 
 // frontPageHandler displays the front page.
 func FrontPageHandler(w http.ResponseWriter, r *http.Request) {
-	p, err := page.LoadPage("FrontPage")
+	frontPageTitle := viper.GetString("FrontPageTitle")
+	p, err := page.LoadPage(frontPageTitle)
 	if err != nil {
-		http.Redirect(w, r, "/edit/FrontPage", http.StatusFound)
+		http.Redirect(w, r, "/edit/"+frontPageTitle, http.StatusFound)
 		return
 	}
 	templates.RenderTemplate(w, "view", p)
