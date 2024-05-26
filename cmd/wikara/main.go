@@ -18,6 +18,7 @@ func main() {
 	viper.SetDefault("Host", "0.0.0.0")
 	viper.SetDefault("ContentDir", "data")
 	viper.SetDefault("FrontPageTitle", "FrontPage")
+	viper.SetDefault("SiteTitle", "Wikara")
 
 	// Load config file
 	viper.SetConfigName("config")

@@ -36,7 +36,6 @@ func mdToHTML(md []byte) []byte {
 	htmlFlags := html.CommonFlags | html.HrefTargetBlank
 	opts := html.RendererOptions{Flags: htmlFlags}
 	renderer := html.NewRenderer(opts)
-
 	return markdown.Render(doc, renderer)
 }
 

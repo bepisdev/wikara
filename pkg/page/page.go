@@ -4,7 +4,7 @@ import (
 	"os"
 	"html/template"
 	"path/filepath"
-	"log"
+	"github.com/spf13/viper"
 )
 
 // Page struct holds the title and body of a wiki page.
@@ -13,6 +13,7 @@ type Page struct {
 	FTitle string
 	Body  []byte
 	HtmlContent template.HTML
+	SiteTitle string
 }
 
 const fileExtension = ".txt"
@@ -31,15 +32,21 @@ func (p *Page) Save() error {
 // LoadPage loads a Page from a text file.
 func LoadPage(title string) (*Page, error) {
 	dataDir := getContentDir()
+	siteTitle := viper.GetString("SiteTitle")
 	filename := filepath.Join(dataDir, title+fileExtension)
-	body, err := os.ReadFile(filename)
+	body, _ := os.ReadFile(filename)
 	html := template.HTML(mdToHTML(body))
 	ftitle := formatTitle(title)
-	if err != nil {
-		return nil, err
+
+	// Generate page contents
+	p := &Page{
+		Title: title,
+		FTitle: ftitle,
+		Body: body,
+		HtmlContent: html,
+		SiteTitle: siteTitle,
 	}
-	p := &Page{Title: title, FTitle: ftitle, Body: body, HtmlContent: html}
-	log.Println(p)
+
 	return p, nil
 }
 
