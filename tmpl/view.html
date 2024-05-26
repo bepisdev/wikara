@@ -1,9 +1,8 @@
-{{ define "pageTitle" }}{{ .Title }} - Wikara{{ end }}
+{{ define "pageTitle" }}{{ .FTitle }} - Wikara{{ end }}
 {{ define "content" }}
 
-<h1>{{.Title}}</h1>
+<h1>{{.FTitle}}</h1>
 <p>[<a href="/edit/{{.Title}}">edit</a>]</p>
 <div>{{.HtmlContent}}</div>
 
 {{ end }}
-
