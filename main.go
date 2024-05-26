@@ -6,9 +6,6 @@ import (
 )
 
 func main() {
-	// Initialize the templates
-	initTemplates()
-
 	// Set up routes
 	http.HandleFunc("/", frontPageHandler)
 	http.HandleFunc("/view/", makeHandler(viewHandler))
