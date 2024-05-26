@@ -3,22 +3,14 @@ package main
 import (
 	"log"
 	"fmt"
-	"os"
-	"path/filepath"
 	"net/http"
 	"github.com/spf13/viper"
 	"github.com/joshburnsxyz/wikara/pkg/api"
 	"github.com/joshburnsxyz/wikara/pkg/templates"
+	"github.com/joshburnsxyz/wikara/pkg/utils"
 )
 
-func getExecPath() string {
-	ex, err := os.Executable()
-	if err != nil {
-		panic(err)
-	}
-	exPath := filepath.Dir(ex)
-	return exPath
-}
+
 
 func main() {
 	// Set up config defaults
@@ -29,7 +21,7 @@ func main() {
 	// Load config file
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(getExecPath())
+	viper.AddConfigPath(utils.GetExecPath())
 	if err := viper.ReadInConfig(); err != nil {
 	    if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 		    log.Println("No config file found, Running with default configuration")

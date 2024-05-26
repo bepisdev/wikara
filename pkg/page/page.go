@@ -2,13 +2,15 @@ package page
 
 import (
 	"fmt"
+	"html/template"
 	"os"
 	"path/filepath"
-	"html/template"
+
 	"github.com/gomarkdown/markdown"
-	"github.com/spf13/viper"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
+	"github.com/joshburnsxyz/wikara/pkg/utils"
+	"github.com/spf13/viper"
 )
 
 // Page struct holds the title and body of a wiki page.
@@ -20,9 +22,14 @@ type Page struct {
 
 const fileExtension = ".txt"
 
+func getContentDir() string {
+	p := fmt.Sprintf("%s/%s", utils.GetExecPath(), viper.GetString("ContentDir"))
+	return p
+}
+
 // Save method writes the Page's content to a text file.
 func (p *Page) Save() error {
-	dataDir := viper.GetString("ContentDir")
+	dataDir := getContentDir()
 	if err := ensureDir(dataDir); err != nil {
 		return err
 	}
@@ -32,7 +39,7 @@ func (p *Page) Save() error {
 
 // LoadPage loads a Page from a text file.
 func LoadPage(title string) (*Page, error) {
-	dataDir := viper.GetString("ContentDir")
+	dataDir := getContentDir()
 	filename := filepath.Join(dataDir, title+fileExtension)
 	body, err := os.ReadFile(filename)
 	html := template.HTML(mdToHTML(body))
