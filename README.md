@@ -20,6 +20,7 @@ Wikara can be configured using a YAML file named `config.yaml` that is placed in
 - `ContentDir`: Directory where wiki page content will be stored (default: data)
 - `FrontPageTitle`: Title of the front page (default: FrontPage)
 - `SiteTitle`: Title of the wiki site (default: Wikara)
+- `SiteLogoURL`: URL to an image that will act as the sites logo (Recommended size of 100x100 pixels)
 
 Example `config.yaml`:
 ```yaml
@@ -29,6 +30,7 @@ SSL: false
 ContentDir: data
 FrontPageTitle: FrontPage
 SiteTitle: MyWiki
+SiteLogoURL: /assets/mylogo.png
 ```
 
 ## Getting Started
