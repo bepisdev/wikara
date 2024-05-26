@@ -35,7 +35,7 @@ func LoadPage(title string) (*Page, error) {
 	siteTitle := viper.GetString("SiteTitle")
 	filename := filepath.Join(dataDir, title+fileExtension)
 	body, _ := os.ReadFile(filename)
-	html := template.HTML(mdToHTML(body))
+	html := template.HTML(sanitizeHTML(mdToHTML(body)))
 	ftitle := formatTitle(title)
 
 	// Generate page contents

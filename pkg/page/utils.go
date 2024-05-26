@@ -6,6 +6,7 @@ import (
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
+	"github.com/microcosm-cc/bluemonday"
 	"fmt"
 	"os"
 	"regexp"
@@ -24,6 +25,12 @@ func ensureDir(dirName string) error {
 		return fmt.Errorf("failed to create directory: %v", err)
 	}
 	return nil
+}
+
+// SanitizeHTML sanitizes HTML content to prevent XSS attacks
+func sanitizeHTML(htmlContent []byte) []byte{
+    policy := bluemonday.UGCPolicy()
+	return []byte(policy.Sanitize(string(htmlContent)))
 }
 
 func mdToHTML(md []byte) []byte {
