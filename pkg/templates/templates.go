@@ -1,41 +1,28 @@
 package templates
 
 import (
-	"html/template"
+	"log"
 	"net/http"
-	"path/filepath"
-	"sync"
 
+	layouts "github.com/joshburnsxyz/go-view-layouts"
 	"github.com/joshburnsxyz/wikara/pkg/page"
 )
 
 var (
-	templates     map[string]*template.Template
-	templatesLock sync.Mutex
+	templates map[string]string
 )
 
 func Init() {
-	templates = make(map[string]*template.Template)
-	loadTemplates()
-}
-
-func loadTemplates() {
-	templates["view.html"] = template.Must(template.ParseFiles(filepath.Join("tmpl", "view.html"), filepath.Join("tmpl", "base.html")))
-	templates["edit.html"] = template.Must(template.ParseFiles(filepath.Join("tmpl", "edit.html"), filepath.Join("tmpl", "base.html")))
+	templates = map[string]string{
+		"view": "tmpl/view.html",
+		"edit": "tmpl/edit.html",
+	}
+	err := layouts.Init(templates, "tmpl/base.html")
+	if err != nil {
+		log.Fatalf("Failed to process templates: %v", err)
+	}
 }
 
 func RenderTemplate(w http.ResponseWriter, tmplname string, p *page.Page) {
-	templatesLock.Lock()
-	defer templatesLock.Unlock()
-
-	tmpl, ok := templates[tmplname+".html"]
-	if !ok {
-		http.Error(w, "Template not found", http.StatusInternalServerError)
-		return
-	}
-
-	err := tmpl.ExecuteTemplate(w, "base", p)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	layouts.RenderTemplate(w, tmplname, "base", p)
 }
