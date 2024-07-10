@@ -21,4 +21,4 @@ clean:
 test:
 	$(GOX) test ./...
 
-.PHONY: clean
+.PHONY: clean test
