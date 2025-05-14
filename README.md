@@ -38,7 +38,7 @@ SiteLogoURL: /assets/mylogo.png
 1. Clone the Wikara repository.
 
 ``` console
-git clone https://github.com/joshburnsxyz/wikara.git
+git clone https://github.com/bepisdev/wikara.git
 cd wikara
 ```
 
